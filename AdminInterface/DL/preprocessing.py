@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import time
 
+path = "../AdminInterface/output.csv"
 cols="""duration,
 protocol_type,
 service,
@@ -54,7 +55,6 @@ for c in cols.split(','):
 df = pd.read_csv(path,names=columns)
 num_cols = df._get_numeric_data().columns
 cate_cols = list(set(df.columns)-set(num_cols))
-df = df.dropna('columns')
 df = df[[col for col in df if df[col].nunique() > 1]]
 df.drop('num_root',axis = 1,inplace = True)
 df.drop('srv_serror_rate',axis = 1,inplace = True)
@@ -72,12 +72,12 @@ df.drop('service',axis = 1,inplace= True)
 
 from sklearn.preprocessing import LabelEncoder
 l=LabelEncoder()
-l.fit_transform(df["Attack Type"])
+l.fit_transform(df["Attack Type","protocol_type"])
 from sklearn.preprocessing import MinMaxScaler
 sc = MinMaxScaler()
-X = sc.fit_transform(X)
+X = sc.fit_transform(df)
 
-
+import tensorflow as tf
 from tensorflow.keras.models import load_model
 
 gg = load_model("/kaggle/working/model1.h5")
