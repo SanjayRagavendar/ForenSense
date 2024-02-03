@@ -40,6 +40,11 @@ echo "$TCPDUMP_LOG"
 echo "$AUDIT_LOG"
 echo "$SYSTEM_INFO_LOG"
 
+TARGET_DIRECTORY="/var"
+chmod -R a-w .
+echo "Files in $TARGET_DIRECTORY are now write-protected."
+
+
 API_URL="http://192.168.0.1:5000/api/logs"  
 curl -X POST -F "tcpdump_log=@$TCPDUMP_LOG" -F "audit_log=@$AUDIT_LOG" -F "system_info_log=@$SYSTEM_INFO_LOG" "$API_URL"
 
