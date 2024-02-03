@@ -2,6 +2,13 @@
 
 LOG_DIR="/var/log/ForenSense"
 
+log_file="/var/log/recently_edited_files.log"
+
+time_frame=60
+
+find / -type f -mmin -$time_frame -exec stat --format="%y %n" {} \; >> "$log_file"
+
+
 TCPDUMP_LOG="$LOG_DIR/tcpdump_log_$(date +'%Y-%m-%d_%H-%M-%S').txt"
 AUDIT_LOG="$LOG_DIR/audit_log_$(date +'%Y-%m-%d_%H-%M-%S').txt"
 SYSTEM_INFO_LOG="$LOG_DIR/system_info_$(date +'%Y-%m-%d_%H-%M-%S').txt"
@@ -10,6 +17,7 @@ touch "$TCPDUMP_LOG"
 touch "$AUDIT_LOG"
 touch "$SYSTEM_INFO_LOG"
 
+
 echo "### Recent Network Traffic ###" > "$TCPDUMP_LOG"
 tcpdump -i wlan0 -c 10000 -n -e -q -tttt -l 'not port 22' | \
 while read -r line; do
@@ -17,6 +25,8 @@ while read -r line; do
     formatted_data=$(IFS=,; echo "${fields[*]}")
     echo "$formatted_data" >> "$TCPDUMP_LOG"
 done
+
+./autopsy.sh
 
 echo "### Recently Accessed Files' Metadata ###" > "$AUDIT_LOG"
 ausearch -i -ts recent >> "$AUDIT_LOG" 
@@ -39,6 +49,8 @@ echo "Logs saved to:"
 echo "$TCPDUMP_LOG"
 echo "$AUDIT_LOG"
 echo "$SYSTEM_INFO_LOG"
+
+fsck -n "/"
 
 TARGET_DIRECTORY="/var"
 chmod -R a-w .

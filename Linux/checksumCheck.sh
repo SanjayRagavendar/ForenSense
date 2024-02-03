@@ -1,11 +1,11 @@
 #!/bin/bash
 
-LOG_FILE="/path/to/checksum_log.txt"
+LOG_FILE="/var/log/checksum_log.txt"
 
 declare -A important_files=(
-    ["/path/to/file1.txt"]="checksum1"
-    ["/path/to/file2.txt"]="checksum2"
-    ["/path/to/file3.txt"]="checksum3"
+    ["/etc/shadow"]="checksum1"
+    ["/etc/passwd"]="checksum2"
+    ["/etc/hosts"]="checksum3"
 )
 
 compare_checksum() {
