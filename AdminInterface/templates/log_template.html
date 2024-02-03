@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checksum Anomaly Log</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Checksum Anomaly Log</h1>
+    <table>
+        <tr>
+            <th>Timestamp</th>
+            <th>Client IP</th>
+            <th>File</th>
+            <th>Expected Checksum</th>
+            <th>Actual Checksum</th>
+        </tr>
+        {% for entry in log_entries %}
+        <tr>
+            <td>{{ entry.timestamp }}</td>
+            <td>{{ entry.client_ip }}</td>
+            <td>{{ entry.file }}</td>
+            <td>{{ entry.expected_checksum }}</td>
+            <td>{{ entry.actual_checksum }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

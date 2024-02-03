@@ -7,13 +7,10 @@ $registryRootKeys = @(
     "HKLM:\SYSTEM\CurrentControlSet",
     "HKCU:\Software",
     "HKCU:\Software\Microsoft\Windows\CurrentVersion"
-    # Add more Registry root keys as needed
 )
 
-# Create an empty hashtable to store Registry data
 $registryData = @{}
 
-# Query subkeys for each root key
 foreach ($rootKey in $registryRootKeys) {
     try {
         $subkeys = Get-ChildItem -Path $rootKey -Recurse -ErrorAction Stop
