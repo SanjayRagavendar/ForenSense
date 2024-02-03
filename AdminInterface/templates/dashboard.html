@@ -1,0 +1,38 @@
+<!-- templates/dashboard.html -->
+{% extends 'base.html' %} 
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block page_heading %}
+    Admin Dashboard
+    <div class="float-right">
+        <span class="mr-3">Welcome, {{ session['username'] }}</span>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Welcome to the Admin Dashboard!</h2>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        System Status
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            CPU Temperature: {{ cpu_temp }}&deg;C <br>
+                            RAM Usage: {{ ram_usage }}% <br>
+                            System Load: {{ system_load }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
