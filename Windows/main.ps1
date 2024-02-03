@@ -30,7 +30,8 @@ foreach ($file in $files) {
     $file.Attributes = "ReadOnly"
     Write-Host "Set read-only attribute for $($file.FullName)"
 }
-
+./exportReg.ps1
+./checksumCheck.ps1
 @"
 Forensic Investigation Report - Case $caseNumber
 
