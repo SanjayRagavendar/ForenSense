@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# Log directory
 LOG_DIR="/var/log/ForenSense"
 
-# Log file names
 TCPDUMP_LOG="$LOG_DIR/tcpdump_log_$(date +'%Y-%m-%d_%H-%M-%S').txt"
 AUDIT_LOG="$LOG_DIR/audit_log_$(date +'%Y-%m-%d_%H-%M-%S').txt"
 SYSTEM_INFO_LOG="$LOG_DIR/system_info_$(date +'%Y-%m-%d_%H-%M-%S').txt"
@@ -12,7 +10,6 @@ touch "$TCPDUMP_LOG"
 touch "$AUDIT_LOG"
 touch "$SYSTEM_INFO_LOG"
 
-# Capture recent network traffic using tcpdump
 echo "### Recent Network Traffic ###" > "$TCPDUMP_LOG"
 tcpdump -i wlan0 -c 10000 -n -e -q -tttt -l 'not port 22' | \
 while read -r line; do
@@ -21,11 +18,9 @@ while read -r line; do
     echo "$formatted_data" >> "$TCPDUMP_LOG"
 done
 
-# Log recently accessed files' metadata using auditd
 echo "### Recently Accessed Files' Metadata ###" > "$AUDIT_LOG"
-ausearch -i -ts recent >> "$AUDIT_LOG"  # Adjust time range as needed
+ausearch -i -ts recent >> "$AUDIT_LOG" 
 
-# Log system information
 echo "### System Information ###" > "$SYSTEM_INFO_LOG"
 echo "Hostname: $(hostname)" >> "$SYSTEM_INFO_LOG"
 echo "Date: $(date)" >> "$SYSTEM_INFO_LOG"
@@ -38,38 +33,32 @@ echo "Disk Usage:" >> "$SYSTEM_INFO_LOG"
 echo "$(df -h)" >> "$SYSTEM_INFO_LOG"
 echo "Running Processes:" >> "$SYSTEM_INFO_LOG"
 
-# Define essential processes
 essential_processes=("init" "systemd" "sshd" "cron" "rsyslog" "bash" "ssh")
 
-# Display log file paths
 echo "Logs saved to:"
 echo "$TCPDUMP_LOG"
 echo "$AUDIT_LOG"
 echo "$SYSTEM_INFO_LOG"
 
-# Send logs to API
 API_URL="http://192.168.0.1:5000/api/logs"  
 curl -X POST -F "tcpdump_log=@$TCPDUMP_LOG" -F "audit_log=@$AUDIT_LOG" -F "system_info_log=@$SYSTEM_INFO_LOG" "$API_URL"
 
-# Check if the script is run as root
 if [ "$(id -u)" -ne 0 ]; then
     echo "This script must be run as root" >&2
     exit 1
 fi
 
-# Terminate all connections
 iptables -F
 iptables -P INPUT DROP
 iptables -P OUTPUT DROP
 echo "All connections terminated."
 
-# Kill non-essential processes
 while read -r line; do
     process_name=$(echo "$line" | awk '{print $1}')
     if [[ ! " ${essential_processes[@]} " =~ " $process_name " ]]; then
         pid=$(echo "$line" | awk '{print $2}')
         echo "Killing non-essential process: $process_name (PID: $pid)"
-        kill -9 "$pid"  # Kill the process by PID
+        kill -9 "$pid"  
     fi
 done < <(ps aux | awk '{print $11, $2}' | tail -n +2)
 

@@ -1,17 +1,13 @@
 #!/bin/bash
 
-# Define the log file path
 LOG_FILE="/path/to/checksum_log.txt"
 
-# Define important files and their checksums
 declare -A important_files=(
     ["/path/to/file1.txt"]="checksum1"
     ["/path/to/file2.txt"]="checksum2"
     ["/path/to/file3.txt"]="checksum3"
-    # Add more files as needed
 )
 
-# Function to compare checksums
 compare_checksum() {
     file="$1"
     expected_checksum="$2"
@@ -24,7 +20,6 @@ compare_checksum() {
     fi
 }
 
-# Iterate through important files and check their checksums
 while IFS= read -r line; do
     checksum=$(echo "$line" | awk '{print $1}')
     filename=$(echo "$line" | awk '{print $2}')
