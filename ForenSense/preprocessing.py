@@ -7,9 +7,6 @@ import tensorflow as tf
 from tensorflow.keras.models import load_model
 
 path = "../ForenSense/kddcup.testdata.unlabeled_10_percent.gz"
-path1 = os.path.join('DL','output.csv')
-
-
 cols="""duration,
 protocol_type,
 service,
