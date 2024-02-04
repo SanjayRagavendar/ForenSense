@@ -13,24 +13,38 @@
         h1 {
             font-size: 24px;
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
-        li {
-            margin-bottom: 10px;
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
         }
-        .key {
-            font-weight: bold;
+        th {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
     <h1>Keys and Values</h1>
-    <ul id="keyValueList">
-        {% for key, value in data.items() %}
-            <li><span class="key">{{ key }}:</span> {{ value }}</li>
-        {% endfor %}
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, value in data.items() %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

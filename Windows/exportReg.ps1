@@ -1,7 +1,5 @@
-# Define the endpoint URL
 $endpointUrl = "http://127.0.0.1:5000/api/reg"
 
-# Define the Registry keys to be queried
 $registryRootKeys = @(
     "HKLM:\Software",
     "HKLM:\SYSTEM\CurrentControlSet",
@@ -18,8 +16,10 @@ foreach ($rootKey in $registryRootKeys) {
             $keyPath = $subkey.PSPath.Replace("Microsoft.PowerShell.Core\Registry::", "")
             try {
                 $key = Get-Item -Path $keyPath -ErrorAction Stop
-                $key | Get-ItemProperty | ForEach-Object {
-                    $registryData["$keyPath\$($_.PSChildName)"] = $_
+                $properties = $key | Get-ItemProperty
+                $registryData += @{
+                    "KeyPath" = $keyPath
+                    "Properties" = $properties
                 }
             } catch {
                 Write-Host "Error accessing subkey: $keyPath"
