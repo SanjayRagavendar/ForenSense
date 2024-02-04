@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, url_for, request, session, j
 from flask_bootstrap import Bootstrap
 import psutil
 from datetime import datetime
+import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
@@ -34,21 +35,28 @@ def render_log():
     log_entries = []
 
     # Read log entries from the log.txt file
-    with open('log.txt', 'r') as log_file:
+    with open('logs/log.txt', 'r') as log_file:
         for line in log_file:
             # Assuming the log entries are in a specific format, parse them accordingly
             parts = line.strip().split('|')
-            if len(parts) == 6:
-                timestamp, client_ip, file, expected_checksum, actual_checksum = [part.strip() for part in parts[1:6]]
-                log_entries.append({
+            print(parts)
+            print(len(parts))
+            if len(parts) == 5:
+                timestamp, client_ip, file, expected_checksum, actual_checksum = [part.strip() for part in parts]
+                entry = {
                     "timestamp": timestamp,
                     "client_ip": client_ip,
                     "file": file,
                     "expected_checksum": expected_checksum,
                     "actual_checksum": actual_checksum
-                })
+                }
+                log_entries.append(entry)
+
+    print(log_entries)
 
     return render_template('log_template.html', log_entries=log_entries)
+
+
 @app.route('/api/checksum-anomaly', methods=['POST'])
 def handle_checksum_anomaly():
     data = request.get_json()
@@ -71,7 +79,7 @@ def log_anomaly(data):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     with open(log_path, 'a') as log_file:
-        log_file.write(f"| {timestamp} | {request.remote_addr} | {data['file']} | {data['expectedChecksum']} | {data['actualChecksum']} |\n")
+        log_file.write(f"{timestamp} | {request.remote_addr} | {data['file']} | {data['expectedChecksum']} | {data['actualChecksum']}\n")
 
 
 @app.route('/login', methods=['POST'])
@@ -121,15 +129,13 @@ def reg_handling():
         return "No JSON data received", 400
 
 def write_to_file(data):
-    with open("data.txt", "w") as file:
-        data["Time Stamp"]=datetime.now()
-        file.write("data")
+    with open('logs/data.json', 'a') as file:
+        file.write(json.dumps(data) + '\n')
 
 @app.route("/reg")
 def display_reg():
-    with open("data.txt","r") as f:
-        data=f.read()
-
+    with open('logs/data.json', 'r') as file:
+        data = json.load(file)
     return render_template("reg.html",data=data)
 
 

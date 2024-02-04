@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Investigation Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        h2 {
+            font-size: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Forensic Investigation Report - Case $dateTime</h1>
+
+    <h2>System Information:</h2>
+    <pre>
+Host Name:                 ERENYEAGER-PC
+OS Name:                   Microsoft Windows 11 Pro
+OS Version:                10.0.22631 N/A Build 22631
+OS Manufacturer:           Microsoft Corporation
+OS Configuration:          Standalone Workstation
+BiosSystemBiosMinorVersion                              : 63
+BiosTargetOperatingSystem                               : 0
+BiosVersion                                             : HPQOEM - 2
+CsAdminPasswordStatus                                   : Disabled
+CsAutomaticManagedPagefile                              : True
+CsAutomaticResetBootOption                              : True
+CsAutomaticResetCapability                              : True
+CsBootOptionOnLimit                                     :
+CsBootOptionOnWatchDog                                  :
+CsBootROMSupported                                      : True
+CsBootStatus                                            : {0, 0, 0, 39...}
+CsBootupState                                           : Normal boot
+CsCaption                                               : ERENYEAGER-PC
+CsChassisBootupState                                    : Safe
+CsChassisSKUNumber                                      : SKU Number
+CsCurrentTimeZone                                       : 330
+CsDaylightInEffect                                      :
+CsDescription                                           : AT/AT COMPATIBLE
+CsDNSHostName                                           : ErenYeager-PC
+CsDomain                                                : WORKGROUP
+CsDomainRole                                            : StandaloneWorkstation
+CsEnableDaylightSavingsTime                             : True
+CsFrontPanelResetStatus                                 : NotImplemented
+CsHypervisorPresent                                     : True
+CsInfraredSupported                                     : False
+CsInitialLoadInfo                                       :
+CsInstallDate                                           :
+CsKeyboardPasswordStatus                                : NotImplemented
+CsLastLoadInfo                                          :
+CsManufacturer                                          : HP
+CsModel                                                 : HP 250 G9
+CsName                                                  : ERENYEAGER-PC
+CsNetworkAdapters                                       : {Ethernet, WiFi, Local Area Connection, ProtonVPN TUN...}
+CsNetworkServerModeEnabled                              : True
+CsNumberOfLogicalProcessors                             : 12
+CsNumberOfProcessors                                    : 1
+CsProcessors                                            : {12th Gen Intel(R) Core(TM) i5-1235U}
+CsOEMStringArray                                        : {$HP$, OemString2, BCU_Y, OemString4...}
+CsPartOfDomain                                          : False
+CsPauseAfterReset                                       : -1
+CsPCSystemType                                          : Mobile
+CsPCSystemTypeEx                                        : Mobile
+CsPowerManagementCapabilities                           :
+CsPowerManagementSupported                              :
+CsPowerOnPasswordStatus                                 : Disabled
+CsPowerState                                            : Unknown
+CsPowerSupplyState                                      : Safe
+CsPrimaryOwnerContact                                   :
+CsPrimaryOwnerName                                      : Windows User
+CsResetCapability                                       : Other
+CsResetCount                                            : -1
+CsResetLimit                                            : -1
+CsRoles                                                 : {LM_Workstation, LM_Server, NT}
+CsStatus                                                : OK
+CsSupportContactDescription                             :
+CsSystemFamily                                          : 103C_5336AN HP 200
+CsSystemSKUNumber                                       : 701N7PA#ACJ
+CsSystemType                                            : x64-based PC
+CsThermalState                                          : Safe
+CsTotalPhysicalMemory                                   : 16837500928
+CsPhyicallyInstalledMemory                              : 16777216
+CsUserName                                              : ERENYEAGER-PC\eren9
+CsWakeUpType                                            : PowerSwitch
+CsWorkgroup                                             : WORKGROUP
+OsName                                                  : Microsoft Windows 11 Pro
+OsType                                                  : WINNT
+OsOperatingSystemSKU                                    : 48
+OsVersion                                               : 10.0.22631
+OsCSDVersion                                            :
+OsBuildNumber                                           : 22631
+OsHotFixes                                              : {KB5033920, KB5027397, KB5034123, KB5032393}
+OsBootDevice                                            : \Device\HarddiskVolume1
+OsSystemDevice                                          : \Device\HarddiskVolume3
+OsSystemDirectory                                       : C:\WINDOWS\system32
+OsSystemDrive                                           : C:
+OsWindowsDirectory                                      : C:\WINDOWS
+OsCountryCode                                           : 1
+OsCurrentTimeZone                                       : 330
+OsLocaleID                                              : 0409
+OsLocale                                                : en-US
+OsLocalDateTime                                         : 04-Feb-24 08:27:37
+OsLastBootUpTime                                        : 03-Feb-24 14:38:41
+OsUptime                                                : 17:48:56.0797162
+OsBuildType                                             : Multiprocessor Free
+OsCodeSet                                               : 1252
+OsDataExecutionPreventionAvailable                      : True
+OsDataExecutionPrevention32BitApplications              : True
+OsDataExecutionPreventionDrivers                        : True
+OsDataExecutionPreventionSupportPolicy                  : OptIn
+OsDebug                                                 : False
+OsDistributed                                           : False
+OsEncryptionLevel                                       : 256
+OsForegroundApplicationBoost                            : Maximum
+OsTotalVisibleMemorySize                                : 16442872
+OsFreePhysicalMemory                                    : 2246660
+OsTotalVirtualMemorySize                                : 27428632
+OsFreeVirtualMemory                                     : 4306516
+OsInUseVirtualMemory                                    : 23122116
+OsTotalSwapSpaceSize                                    :
+OsSizeStoredInPagingFiles                               : 10985760
+OsFreeSpaceInPagingFiles                                : 10356684
+OsPagingFiles                                           : {C:\pagefile.sys}
+OsHardwareAbstractionLayer                              : 10.0.22621.2506
+OsInstallDate                                           : 12-Dec-23 18:10:09
+OsManufacturer                                          : Microsoft Corporation
+OsMaxNumberOfProcesses                                  : 4294967295
+OsMaxProcessMemorySize                                  : 137438953344
+OsMuiLanguages                                          : {en-GB}
+OsNumberOfLicensedUsers                                 : 0
+OsNumberOfProcesses                                     : 334
+OsNumberOfUsers                                         : 2
+OsOrganization                                          :
+OsArchitecture                                          : 64-bit
+OsLanguage                                              : en-GB
+OsProductSuites                                         : {TerminalServicesSingleSession}
+OsOtherTypeDescription                                  :
+OsPAEEnabled                                            :
+OsPortableOperatingSystem                               : False
+OsPrimary                                               : True
+OsProductType                                           : WorkStation
+OsRegisteredUser                                        : Windows User
+OsSerialNumber                                          : 00331-10000-00001-AA115
+OsServicePackMajorVersion                               : 0
+OsServicePackMinorVersion                               : 0
+OsStatus                                                : OK
+OsSuites                                                : {TerminalServices, TerminalServicesSingleSession}
+OsServerLevel                                           :
+KeyboardLayout                                          : en-US
+TimeZone                                                : (UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi
+LogonServer                                             : \\ERENYEAGER-PC
+PowerPlatformRole                                       : Mobile
+HyperVisorPresent                                       : True
+HyperVRequirementDataExecutionPreventionAvailable       :
+HyperVRequirementSecondLevelAddressTranslation          :
+HyperVRequirementVirtualizationFirmwareEnabled          :
+HyperVRequirementVMMonitorModeExtensions                :
+DeviceGuardSmartStatus                                  : Off
+DeviceGuardRequiredSecurityProperties                   : {0}
+DeviceGuardAvailableSecurityProperties                  : {BaseVirtualizationSupport, DMAProtection, SecureMemoryOverwrite, 5...}
+DeviceGuardSecurityServicesConfigured                   : {HypervisorEnforcedCodeIntegrity}
+DeviceGuardSecurityServicesRunning                      : {CredentialGuard, HypervisorEnforcedCodeIntegrity}
+DeviceGuardCodeIntegrityPolicyEnforcementStatus         : EnforcementMode
+DeviceGuardUserModeCodeIntegrityPolicyEnforcementStatus : Off
+    </pre>
+
+    <h2>Disk Information:</h2>
+    <pre>
+Number F Serial Number                    HealthStatus         OperationalStatus      Total Size Partition Style
+------ - -------------                    ------------         -----------------      ---------- ------ 
+0      S 0025_38D5_2140_C0BF.             Healthy              Online                  476.94 GB GPT
+
+(Your disk information data continues here)
+    </pre>
+
+    <h2>Partition</h2>
+    <pre>
+DiskPath: \\?\scsi#disk&ven_nvme&prod_samsung_mzvlq512#5&2a49e737&0&000000#{53f56307-b6bf-11d0-94f2-00a0c91efb8b}
+PartitionNumber  DriveLetter Offset         Size Type
+---------------  ----------- ------         ---- ----
+1                           1048576        100 MB System
+2                           105906176      16 MB Reserved
+3                C           122683392      199.31 GB Basic
+4                           214131802112   703 MB Recovery
+5                D           214869999616   223.74 GB Basic
+6                           455110295552   35 GB Unknown
+7                           492691259392   4 GB Unknown
+8                           496986226688   14.08 GB Unknown
+
+    </pre>
+</body>
+</html>

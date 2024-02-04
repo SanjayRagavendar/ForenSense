@@ -1,0 +1,10 @@
+2024-02-04 03:18:05 | 127.0.0.1 | C:\Windows\System32\kernelbase.dll | expected_checksum9 | E848D4FF28F9D6AB7A6E556C107278F4 
+2024-02-04 03:18:05 | 127.0.0.1 | C:\Windows\System32\services.exe | expected_checksum4 | C497C3C5EB0FE16A43D56B9B1EAE8D3B 
+2024-02-04 03:18:05 | 127.0.0.1 | C:\Windows\System32\ntoskrnl.exe | expected_checksum1 | 7FBD63ED74F9F78634EC8012B41F805B
+2024-02-04 03:18:05 | 127.0.0.1 | C:\Windows\System32\kernel32.dll | expected_checksum2 | A4A493C74AF165AB53303E0AF34272FB 
+2024-02-04 03:18:05 | 127.0.0.1 | C:\Windows\System32\user32.dll | expected_checksum7 | 0B46860C338BF961B9215AD3891E051B 
+2024-02-04 03:18:05 | 127.0.0.1 | C:\Windows\System32\ntdll.dll | expected_checksum3 | 6886A7D522B453A57F0A69191236326B 
+2024-02-04 03:18:05 | 127.0.0.1 | C:\Windows\System32\lsass.exe | expected_checksum5 | 7E41F257EEA75E5E20AEB485407F1DCD 
+2024-02-04 03:18:05 | 127.0.0.1 | C:\Windows\System32\svchost.exe | expected_checksum6 | 8EC922C7A58A8701AB481B7BE9644536 
+2024-02-04 03:18:05 | 127.0.0.1 | C:\Windows\System32\advapi32.dll | expected_checksum8 | 54E43A6D5F2FFA6A92EE30A70BC2274B 
+2024-02-04 03:18:05 | 127.0.0.1 | C:\Windows\System32\win32k.sys | expected_checksum10 | 8D508DDFF7C6BD70CFD114EB0A66068A 

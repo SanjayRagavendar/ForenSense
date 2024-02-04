@@ -19,7 +19,33 @@
             </div>
         </div>
         <div class="row mt-4">
-            <div class="col-md-4">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar sidebar-sticky">
+                <div class="sidebar-sticky">
+                    <!-- Left navigation panel -->
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="modal" data-target="#alertsModal">Alerts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('display_reg') }}">Check Registers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('display_report') }}">Report Check</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('render_log') }}">Checksum Anomoly</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Settings</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
                         System Status
