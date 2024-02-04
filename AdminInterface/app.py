@@ -1,54 +1,9 @@
-# # app.py
-# from flask import Flask, render_template, redirect, url_for, request, session
-# from flask_bootstrap import Bootstrap
-# import psutil
-
-# app = Flask(__name__)
-# app.config['SECRET_KEY'] = 'your_secret_key'
-# Bootstrap(app)
-
-# # Hardcoded admin credentials (replace with a proper authentication system)
-# ADMIN_USERNAME = 'admin'
-# ADMIN_PASSWORD = 'admin'
-
-# @app.route('/')
-# def login():
-#     return render_template('login.html')
-
-# @app.route('/dashboard')
-# def dashboard():
-#     if 'username' in session and session['username'] == ADMIN_USERNAME:
-#         # Gather real-time system information
-#         cpu_temp = 58
-#         ram_usage = psutil.virtual_memory().percent
-#         system_load = psutil.getloadavg()[0]
-
-#         return render_template('dashboard.html', cpu_temp=cpu_temp, ram_usage=ram_usage, system_load=system_load)
-    
-#     return redirect(url_for('login'))
-
-# @app.route('/login', methods=['POST'])
-# def do_login():
-#     username = request.form['username']
-#     password = request.form['password']
-    
-#     if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
-#         session['username'] = username
-#         return redirect(url_for('dashboard'))
-#     return redirect(url_for('login'))
-
-# @app.route('/logout')
-# def logout():
-#     session.pop('username', None)
-#     return redirect(url_for('login'))
-
-# if __name__ == '__main__':
-#     app.run(debug=True)
-
-# app.py
 from flask import Flask, render_template, redirect, url_for, request, session, jsonify
+<<<<<<< HEAD
 from plyer import notification  # Import the plyer notification module
 
+=======
+>>>>>>> aa94055b029d72c7dc466af64bd6eb4d9b8ff254
 from flask_bootstrap import Bootstrap
 import psutil
 from datetime import datetime
@@ -217,16 +172,6 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('login'))
 
-@app.route('/api/chksum', methods=['POST'])
-def receive_checksum_alert():
-    alert_data = request.get_data(as_text=True)
-    alerts.append(alert_data)
-
-    # Perform any additional processing or analysis based on the received alert data
-    # For example, you can log the alert, send notifications, etc.
-
-    return jsonify({"status": "Alert received successfully"})
-
 @app.route('/alerts', methods=['GET'])
 def display_alerts():
     if request.method == 'GET':
@@ -237,7 +182,7 @@ def display_alerts():
 
 
 
-@app.route('/api/reg', methods=['POST'])
+@app.route('/api/report', methods=['POST'])
 def handle_reg():
     if 'file' not in request.files:
         return jsonify({"error": "No file provided"}), 400
@@ -247,10 +192,11 @@ def handle_reg():
     if file.filename == '':
         return jsonify({"error": "No selected file"}), 400
 
-    file.save(f"uploads/{file.filename}")
+    file.save(f"templates/uploads/report")
 
     return jsonify({"message": "File uploaded successfully"}), 200
 
+<<<<<<< HEAD
 # Store received strings in a list
 received_strings = []
 
@@ -269,6 +215,33 @@ def display_strings():
         return jsonify({'received_strings': received_strings})
     else:
         return 'Method not allowed', 405
+=======
+@app.route("/report",methods=['GET'])
+def handle_reg():
+    return render_template("uploads/report")
+    
+@app.route("/api/reg", methods=['POST'])
+def reg_handling():
+    data = request.get_json()
+    if data:
+        write_to_file(data)
+        return "Data written to file successfully", 200
+    else:
+        return "No JSON data received", 400
+
+def write_to_file(data):
+    with open("data.txt", "w") as file:
+        data["Time Stamp"]=datetime.now()
+        file.write("data")
+
+@app.route("/reg",methods=['GET'])
+def display_reg():
+    with open("data.txt","r") as f:
+        data=f.read()
+
+    return render_template("reg.html",data=data)
+
+>>>>>>> aa94055b029d72c7dc466af64bd6eb4d9b8ff254
 
 if __name__ == '__main__':
     app.run(debug=True)
