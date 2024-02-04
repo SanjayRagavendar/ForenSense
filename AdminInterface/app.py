@@ -103,13 +103,13 @@ def handle_reg():
     if file.filename == '':
         return jsonify({"error": "No selected file"}), 400
 
-    file.save(f"templates/uploads/report")
+    file.save(f"templates/uploads/report.html")
 
     return jsonify({"message": "File uploaded successfully"}), 200
 
-@app.route("/report",methods=['GET'])
-def handle_reg():
-    return render_template("uploads/report")
+@app.route("/report")
+def display_report():
+    return render_template("uploads/report.html")
     
 @app.route("/api/reg", methods=['POST'])
 def reg_handling():
@@ -125,7 +125,7 @@ def write_to_file(data):
         data["Time Stamp"]=datetime.now()
         file.write("data")
 
-@app.route("/reg",methods=['GET'])
+@app.route("/reg")
 def display_reg():
     with open("data.txt","r") as f:
         data=f.read()
