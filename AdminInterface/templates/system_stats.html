@@ -1,0 +1,32 @@
+<!-- templates/system_stats.html -->
+{% extends 'base.html' %}
+
+{% block title %}System Stats{% endblock %}
+
+{% block content %}
+    <h2>System Stats</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Recently Accessed Files</th>
+                <th>Modified Files</th>
+                <th>Ram Usage</th>
+                <th>Cpu Usage</th>
+                <th>System Load</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stat in system_stats_list %}
+                <tr>
+                    <td>{{ stat['Timestamp'] }}</td>
+                    <td>{{ stat['RecentlyAccessedFiles'] }}</td>
+                    <td>{{ stat['ModifiedFiles'] }}</td>
+                    <td>{{ stat['RamUsage'] }} MB</td>
+                    <td>{{ stat['CpuUsage'] }}%</td>
+                    <td>{{ stat['Load'] }}%</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
