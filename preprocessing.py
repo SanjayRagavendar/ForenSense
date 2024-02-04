@@ -87,3 +87,10 @@ figam=gg.predict(X)
 end_time = time.time()
 
 print(figam.mean())
+
+label_encoder = LabelEncoder()
+label_encoder.classes_ = np.array(['dos','normal','u2r', 'r2l', 'probe', 'dos'])
+
+predicted_labels = label_encoder.inverse_transform(figam.argmax(axis=1))
+
+print(predicted_labels)
