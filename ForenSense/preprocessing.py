@@ -103,3 +103,22 @@ label_encoder.classes_ = np.array(['dos','normal','u2r', 'r2l', 'probe', 'dos'])
 predicted_labels = label_encoder.inverse_transform(figam.argmax(axis=1))
 
 print(predicted_labels)
+# ... (previous code)
+
+gg = load_model("model_withattack_type.h5")
+
+start_time = time.time()
+predictions = gg.predict(X)
+end_time = time.time()
+
+label_encoder = LabelEncoder()
+label_encoder.classes_ = np.array(['dos', 'normal', 'u2r', 'r2l', 'probe', 'dos'])
+
+predicted_labels = label_encoder.inverse_transform(predictions.argmax(axis=1))
+
+# Append predicted labels to 'anomaly_detection.txt'
+with open('anomaly_detection.txt', 'a') as file:
+    for label in predicted_labels:
+        file.write(label + '\n')
+
+print(predicted_labels)
