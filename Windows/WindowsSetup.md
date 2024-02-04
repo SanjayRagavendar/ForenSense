@@ -13,4 +13,6 @@ nmcap /start /network * /capture all
 nmcap /file C:\Logs\network_capture.cap
 ```
 ### Stoping the service
+```cmd
 nmcap /stop
+```

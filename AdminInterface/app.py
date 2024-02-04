@@ -47,6 +47,7 @@
 
 # app.py
 from flask import Flask, render_template, redirect, url_for, request, session, jsonify
+from plyer import notification  # Import the plyer notification module
 
 from flask_bootstrap import Bootstrap
 import psutil
@@ -78,6 +79,84 @@ def dashboard():
     
     return redirect(url_for('login'))
 
+@app.route('/display-alerts-on-windows', methods=['GET'])
+def display_alerts_on_windows():
+    if request.method == 'GET':
+        if received_strings:
+            # Display a pop-up notification with received strings
+            alert_message = "\n".join(received_strings)
+            notification.notify(
+                title='Alerts',
+                message=alert_message,
+                app_name='Flask Alerts',
+            )
+        else:
+            notification.notify(
+                title='No Alerts',
+                message='No alerts to display',
+                app_name='Flask Alerts',
+            )
+        return 'Alerts displayed on Windows!', 200
+    else:
+        return 'Method not allowed', 405
+system_stats_list = []
+
+@app.route("/report",methods=['GET'])
+def handle_reg():
+    return render_template("uploads/report")
+    
+@app.route("/reg",methods=['GET'])
+def display_reg():
+    with open("data.txt","r") as f:
+        data=f.read()
+
+    return render_template("reg.html",data=data)
+
+@app.route('/api/system-stats', methods=['POST'])
+def handle_system_stats():
+    data = request.get_json()
+
+    if data:
+        print("System Stats Received:")
+        print(f"Timestamp: {data['Timestamp']}")
+        print(f"Recently Accessed Files: {data['RecentlyAccessedFiles']}")
+        print(f"Modified Files: {data['ModifiedFiles']}")
+        print(f"Ram Usage: {data['RamUsage']} MB")
+        print(f"Cpu Usage: {data['CpuUsage']}%")
+        print(f"System Load: {data['Load']}%")
+
+        # Store the received system stats in the list
+        system_stats_list.append(data)
+
+        # Store the data in the log.txt file
+        log_path = "log.txt"
+        with open(log_path, 'a') as log_file:
+            log_file.write(f"Timestamp: {data['Timestamp']}\n")
+            log_file.write(f"Recently Accessed Files: {data['RecentlyAccessedFiles']}\n")
+            log_file.write(f"Modified Files: {data['ModifiedFiles']}\n")
+            log_file.write(f"Ram Usage: {data['RamUsage']} MB\n")
+            log_file.write(f"Cpu Usage: {data['CpuUsage']}%\n")
+            log_file.write(f"System Load: {data['Load']}%\n\n")
+
+        # You can also store the data in a file if needed
+        # with open('system_stats.txt', 'a') as file:
+        #     file.write(str(data) + '\n')
+
+    return jsonify({"message": "System stats received successfully"})
+@app.route('/show-alerts')
+def show_alerts():
+    # Read log entries from the log.txt file
+    log_data = []
+    with open('log.txt', 'r') as log_file:
+        log_data = log_file.readlines()
+
+    return render_template('your_template.html', log_data=log_data)
+@app.route('/display-system-stats')
+def display_system_stats():
+    return render_template('system_stats.html', system_stats_list=system_stats_list)
+@app.route('/api/get-system-stats', methods=['GET'])
+def get_system_stats():
+    return jsonify({"system_stats": system_stats_list})
 @app.route('/checksum-anomaly')
 def render_log():
     log_entries = []
@@ -150,7 +229,13 @@ def receive_checksum_alert():
 
 @app.route('/alerts', methods=['GET'])
 def display_alerts():
-    return jsonify({"alerts": alerts})
+    if request.method == 'GET':
+        return jsonify({'received_strings': received_strings})
+    else:
+        return 'Method not allowed', 405
+
+
+
 
 @app.route('/api/reg', methods=['POST'])
 def handle_reg():
@@ -166,7 +251,24 @@ def handle_reg():
 
     return jsonify({"message": "File uploaded successfully"}), 200
 
-    
+# Store received strings in a list
+received_strings = []
+
+@app.route('/receive', methods=['POST'])
+def receive_string():
+    if request.method == 'POST':
+        string_received = request.json.get('string')  # Assuming the string is sent in JSON format
+        received_strings.append(string_received)
+        return 'String received and stored successfully!', 200
+    else:
+        return 'Method not allowed', 405
+
+@app.route('/display', methods=['GET'])
+def display_strings():
+    if request.method == 'GET':
+        return jsonify({'received_strings': received_strings})
+    else:
+        return 'Method not allowed', 405
 
 if __name__ == '__main__':
     app.run(debug=True)
