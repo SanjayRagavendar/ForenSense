@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serial Numbers List</title>
+    <style>
+        .normal {
+            color: green;
+        }
+
+        .not-normal {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<h1>List of Serial Numbers</h1>
+<table border="1">
+    <tr>
+        <th>Count</th>
+        <th>Serial Number</th>
+    </tr>
+    {% for serialNumber in data %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            {% if serialNumber == 'normal' %}
+                <td class='normal'>{{ serialNumber }}</td>
+            {% else %}
+                <td class='not-normal'>{{ serialNumber }}</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

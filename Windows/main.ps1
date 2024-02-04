@@ -45,14 +45,9 @@ $htmlContent = @"
     <h2>System Information:</h2>
     <pre>$($systemInfo | Out-String)</pre>
 
-    <h2>Operating System Information:</h2>
-    <pre>$($osInfo | Out-String)</pre>
-
     <h2>Disk Information:</h2>
     <pre>$($diskInfo | Out-String)</pre>
 
-    <h2>Analysis Findings:</h2>
-    <p>Add analysis findings here...</p>
 </body>
 </html>
 "@

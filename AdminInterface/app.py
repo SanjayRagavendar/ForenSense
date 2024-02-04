@@ -56,6 +56,14 @@ def render_log():
 
     return render_template('log_template.html', log_entries=log_entries)
 
+@app.route('/logChecker')
+def log_check():
+    with open('logs/anomaly_detection.txt', 'r') as f:
+        data = [line.strip() for line in f]
+        data = data[:10000]
+
+    return render_template('log.html', data=data)
+
 
 @app.route('/api/checksum-anomaly', methods=['POST'])
 def handle_checksum_anomaly():
@@ -129,14 +137,17 @@ def reg_handling():
         return "No JSON data received", 400
 
 def write_to_file(data):
-    with open('logs/data.json', 'a') as file:
-        file.write(json.dumps(data) + '\n')
+    with open('logs/data.json', 'a') as files:
+        files.write(json.dumps(data) + '\n')
 
 @app.route("/reg")
 def display_reg():
-    with open('logs/data.json', 'r') as file:
-        data = json.load(file)
-    return render_template("reg.html",data=data)
+    with open('logs/registry_vales.reg', 'r', encoding='utf-16') as file:
+        registry_data = file.readlines()[:50]
+
+        print(registry_data)
+
+    return render_template("reg.html",data=registry_data)
 
 
 if __name__ == '__main__':
